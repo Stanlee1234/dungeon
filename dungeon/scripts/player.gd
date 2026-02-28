@@ -12,9 +12,12 @@ var is_climbing = false
 @onready var sprite = $AnimatedSprite2D
 
 func _physics_process(delta: float) -> void:
+	if Engine.get_physics_frames() % 60 == 0:
+		print("--- SCRIPT IS RUNNING ---")
+
 	if DEAD: return
 
-	_check_for_chain_tile()
+	_check_for_tile_data()
 
 	if is_climbing:
 		_handle_chain_logic()
@@ -23,20 +26,29 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
-func _check_for_chain_tile():
-	var tilemap = get_parent().find_child("TileMapLayer")
+func _check_for_tile_data():
+	var tilemap = get_parent().find_child("TileMapLayer", true, false)
 	if not tilemap:
-		on_chain = false
 		return
 
-	var check_pos = global_position + Vector2(0, -8)
+	var check_pos = global_position + Vector2(0, 0)
 	var map_pos = tilemap.local_to_map(check_pos)
 	var tile_data = tilemap.get_cell_tile_data(map_pos)
 
-	if tile_data and tile_data.get_custom_data("is_chain"):
-		if not on_chain:
-			is_climbing = true
-		on_chain = true
+	if tile_data:
+		if tile_data.get_custom_data("is_danger") == true:
+			print("!!! DIED FROM DANGER TILE !!!")
+			_die()
+		
+		if tile_data.get_custom_data("is_chain") == true:
+			if not on_chain:
+				is_climbing = true
+			on_chain = true
+		else:
+			if on_chain:
+				velocity.y = JUMP_VELOCITY
+			on_chain = false
+			is_climbing = false
 	else:
 		if on_chain:
 			velocity.y = JUMP_VELOCITY
@@ -74,11 +86,6 @@ func _handle_chain_logic():
 		sprite.flip_h = horizontal_dir < 0
 	else:
 		velocity.x = 0
-
-	if Input.is_action_just_pressed("ui_up") and horizontal_dir != 0:
-		is_climbing = false
-		velocity.y = JUMP_VELOCITY
-		velocity.x = horizontal_dir * SPEED
 
 func _update_animations(direction):
 	if is_climbing: return
