@@ -1,6 +1,15 @@
 [gd_scene format=3 uid="uid://cyvr03yrg8pu5"]
 
 [ext_resource type="Texture2D" uid="uid://cvtgbp1m4lfo7" path="res://assets/Witchcraft_sprite_sheet_v1_0/Sprite_sheets/Witchcraft_spr_1.png" id="1_3vyb7"]
+[ext_resource type="Script" uid="uid://dgycguitnb7g6" path="res://scripts/player.gd" id="1_g2els"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3vyb7"]
+atlas = ExtResource("1_3vyb7")
+region = Rect2(96, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tuyoq"]
+atlas = ExtResource("1_3vyb7")
+region = Rect2(120, 0, 24, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g2els"]
 atlas = ExtResource("1_3vyb7")
@@ -18,16 +27,24 @@ region = Rect2(48, 0, 24, 24)
 atlas = ExtResource("1_3vyb7")
 region = Rect2(72, 0, 24, 24)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_tuyoq"]
-atlas = ExtResource("1_3vyb7")
-region = Rect2(96, 0, 24, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fjrip"]
-atlas = ExtResource("1_3vyb7")
-region = Rect2(120, 0, 24, 24)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_4r5pv"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3vyb7")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tuyoq")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_g2els")
@@ -40,15 +57,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_qlg0r")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_tuyoq")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fjrip")
 }],
 "loop": true,
-"name": &"new_animation",
+"name": &"walk",
 "speed": 6.0
 }]
 
@@ -56,11 +67,13 @@ animations = [{
 size = Vector2(10, 17)
 
 [node name="Player" type="CharacterBody2D" unique_id=1944656749]
+script = ExtResource("1_g2els")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=572536742]
 sprite_frames = SubResource("SpriteFrames_4r5pv")
-animation = &"new_animation"
-frame_progress = 0.9499447
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.48395032
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2014202410]
 position = Vector2(-1, -0.5)
