@@ -49,17 +49,19 @@ animations = [{
 }],
 "loop": true,
 "name": &"new_animation",
-"speed": 4.0
+"speed": 6.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_60mlk"]
+size = Vector2(10, 17)
 
 [node name="Player" type="CharacterBody2D" unique_id=1944656749]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=572536742]
 sprite_frames = SubResource("SpriteFrames_4r5pv")
 animation = &"new_animation"
-frame_progress = 0.95000297
+frame_progress = 0.9499447
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2014202410]
+position = Vector2(-1, -0.5)
 shape = SubResource("RectangleShape2D_60mlk")

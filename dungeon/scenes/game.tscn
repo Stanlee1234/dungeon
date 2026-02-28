@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cd4651b5r4pau"]
 
 [ext_resource type="Texture2D" uid="uid://cahhsomq1gin2" path="res://assets/Dunjo/blacknwhite.png" id="1_uwrxv"]
+[ext_resource type="PackedScene" uid="uid://cyvr03yrg8pu5" path="res://scenes/player.tscn" id="2_yqjtg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yqjtg"]
 texture = ExtResource("1_uwrxv")
@@ -60,3 +61,6 @@ color = Color(0, 0, 0, 1)
 [node name="TileMap" type="TileMap" parent="." unique_id=2006993949]
 tile_set = SubResource("TileSet_lnu2h")
 format = 2
+
+[node name="Player" parent="." unique_id=1944656749 instance=ExtResource("2_yqjtg")]
+position = Vector2(6, 9)
