@@ -12,6 +12,8 @@ var is_climbing = false
 @onready var sprite = $AnimatedSprite2D
 
 func _physics_process(delta: float) -> void:
+	if Engine.get_physics_frames() % 60 == 0:
+		print("--- SCRIPT IS RUNNING ---")
 
 	if DEAD: return
 
@@ -35,6 +37,7 @@ func _check_for_tile_data():
 
 	if tile_data:
 		if tile_data.get_custom_data("is_danger") == true:
+			print("!!! DIED FROM DANGER TILE !!!")
 			_die()
 		
 		if tile_data.get_custom_data("is_chain") == true:
@@ -100,4 +103,5 @@ func _die():
 	call_deferred("_reload_game")
 
 func _reload_game():
+	await get_tree().create_timer(1).timeout
 	get_tree().reload_current_scene()
