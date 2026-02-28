@@ -27,6 +27,14 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 		
 func _die():
+	if DEAD: 
+		return
 	DEAD = true
-	await get_tree().create_timer(0.5).timeout
+	
+	set_physics_process(false) 
+	get_tree().paused = false
+	call_deferred("_reload_game")
+
+func _reload_game():
+	await get_tree().create_timer(1).timeout
 	get_tree().reload_current_scene()
