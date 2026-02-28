@@ -48,10 +48,17 @@ texture_region_size = Vector2i(12, 12)
 5:5/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_feb5d"]
+tile_size = Vector2i(12, 12)
 sources/3 = SubResource("TileSetAtlasSource_e2o6t")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_80nbo"]
 
 [node name="Game" type="Node2D" unique_id=462882244]
 
 [node name="TileMap" type="TileMap" parent="." unique_id=692846002]
 tile_set = SubResource("TileSet_feb5d")
 format = 2
+layer_0/tile_data = PackedInt32Array(0, 3, 0, 65536, 3, 1, 131072, 3, 2, 131073, 65539, 2, 131074, 65539, 2, 131075, 65539, 2, 131076, 131075, 2, 65540, 131075, 1, 4, 131075, 0, 1, 65539, 0, 2, 65539, 0, 3, 65539, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=322313415]
+texture = SubResource("CanvasTexture_80nbo")
