@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cfu7ubycmi47p"
-path="res://.godot/imported/Banjo_tiles.png-114102c2c6fb90c0884b20781afde226.ctex"
+uid="uid://do3brq14h00v4"
+path="res://.godot/imported/Witchcraft_spr_4.png-8187fa8633f2cb25f9f68fc8279d53a7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Dunjo/Banjo_tiles.png"
-dest_files=["res://.godot/imported/Banjo_tiles.png-114102c2c6fb90c0884b20781afde226.ctex"]
+source_file="res://assets/Sprite_sheets/Witchcraft_spr_4.png"
+dest_files=["res://.godot/imported/Witchcraft_spr_4.png-8187fa8633f2cb25f9f68fc8279d53a7.ctex"]
 
 [params]
 

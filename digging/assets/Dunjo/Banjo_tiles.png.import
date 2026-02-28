@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://doa06qsottl14"
-path="res://.godot/imported/blacknwhite.png-86377142f451e74f914bc9d7537c507a.ctex"
+uid="uid://cfu7ubycmi47p"
+path="res://.godot/imported/Banjo_tiles.png-6e9946194ab244edd1dd0ce32c71706b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Dunjo/blacknwhite.png"
-dest_files=["res://.godot/imported/blacknwhite.png-86377142f451e74f914bc9d7537c507a.ctex"]
+source_file="res://assets/Dunjo/Banjo_tiles.png"
+dest_files=["res://.godot/imported/Banjo_tiles.png-6e9946194ab244edd1dd0ce32c71706b.ctex"]
 
 [params]
 

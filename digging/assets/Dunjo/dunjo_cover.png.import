@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bmn5l0a58qt4p"
-path="res://.godot/imported/blacknwhite_example.png-13b32a6a118405b0b1027c91881d47f2.ctex"
+uid="uid://dnd2wgo3b80ah"
+path="res://.godot/imported/dunjo_cover.png-27fa2d86988ed24db602642514dac27b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Dunjo/blacknwhite_example.png"
-dest_files=["res://.godot/imported/blacknwhite_example.png-13b32a6a118405b0b1027c91881d47f2.ctex"]
+source_file="res://assets/Dunjo/dunjo_cover.png"
+dest_files=["res://.godot/imported/dunjo_cover.png-27fa2d86988ed24db602642514dac27b.ctex"]
 
 [params]
 

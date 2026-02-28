@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://tc8cnvmufy2s"
-path="res://.godot/imported/blacknwhite_p=1.png-8e378aa0b1667ac3763100ace548a79b.ctex"
+uid="uid://dn3g2s3imck2o"
+path="res://.godot/imported/Witchcraft_spr_2.png-0b5ccc697fb87ae17e62edb588cdbe62.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Dunjo/blacknwhite_p=1.png"
-dest_files=["res://.godot/imported/blacknwhite_p=1.png-8e378aa0b1667ac3763100ace548a79b.ctex"]
+source_file="res://assets/Sprite_sheets/Witchcraft_spr_2.png"
+dest_files=["res://.godot/imported/Witchcraft_spr_2.png-0b5ccc697fb87ae17e62edb588cdbe62.ctex"]
 
 [params]
 

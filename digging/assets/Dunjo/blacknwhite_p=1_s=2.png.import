@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bvl40yg7hcaj"
-path="res://.godot/imported/blacknwhite_p=1_s=2.png-7bd46b5c0bbdd713f2f1fdc0b04f57b1.ctex"
+path="res://.godot/imported/blacknwhite_p=1_s=2.png-9d0c8d229f9aeebe1754960da37996a9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Dunjo/blacknwhite_p=1_s=2.png"
-dest_files=["res://.godot/imported/blacknwhite_p=1_s=2.png-7bd46b5c0bbdd713f2f1fdc0b04f57b1.ctex"]
+source_file="res://assets/Dunjo/blacknwhite_p=1_s=2.png"
+dest_files=["res://.godot/imported/blacknwhite_p=1_s=2.png-9d0c8d229f9aeebe1754960da37996a9.ctex"]
 
 [params]
 
