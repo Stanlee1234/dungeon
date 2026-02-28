@@ -38,6 +38,8 @@ func _check_for_chain_tile():
 			is_climbing = true
 		on_chain = true
 	else:
+		if on_chain:
+			velocity.y = JUMP_VELOCITY
 		on_chain = false
 		is_climbing = false
 
@@ -67,15 +69,15 @@ func _handle_chain_logic():
 		velocity.y = SLIDE_SPEED
 		sprite.play("idle")
 
-	velocity.x = 0
+	if horizontal_dir:
+		velocity.x = horizontal_dir * SPEED
+		sprite.flip_h = horizontal_dir < 0
+	else:
+		velocity.x = 0
 
 	if Input.is_action_just_pressed("ui_up") and horizontal_dir != 0:
 		is_climbing = false
 		velocity.y = JUMP_VELOCITY
-		velocity.x = horizontal_dir * SPEED
-	
-	elif horizontal_dir != 0 and not Input.is_action_pressed("ui_up"):
-		is_climbing = false
 		velocity.x = horizontal_dir * SPEED
 
 func _update_animations(direction):
