@@ -18,6 +18,10 @@ config/icon="res://icon.svg"
 
 window/canvas_textures/default_texture_filter=1
 
+[navigation]
+
+2d/default_cell_size=1.1079999999999999
+
 [physics]
 
 3d/physics_engine="Jolt Physics"
