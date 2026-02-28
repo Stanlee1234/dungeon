@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://ckgrcx5alga06"]
+
+[ext_resource type="Texture2D" uid="uid://b2e8haxvgjvkd" path="res://assets/pixilart-sprite.png" id="1_5pg7g"]
+
+[sub_resource type="GDScript" id="GDScript_5pg7g"]
+script/source = "extends Area2D
+
+
+
+func _on_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
+	body._die()
+"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xbcdo"]
+atlas = ExtResource("1_5pg7g")
+region = Rect2(0, 0, 12, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bflj7"]
+atlas = ExtResource("1_5pg7g")
+region = Rect2(12, 0, 12, 12)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kd5gq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xbcdo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bflj7")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5pg7g"]
+size = Vector2(10, 5)
+
+[node name="Spikes" type="Area2D" unique_id=1608333240]
+script = SubResource("GDScript_5pg7g")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=754109034]
+sprite_frames = SubResource("SpriteFrames_kd5gq")
+autoplay = "default"
+frame_progress = 0.6434719
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1664204371]
+position = Vector2(0, 2.5)
+shape = SubResource("RectangleShape2D_5pg7g")
+
+[connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]
