@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://cd4651b5r4pau"]
+
+[ext_resource type="Texture2D" uid="uid://cahhsomq1gin2" path="res://assets/Dunjo/blacknwhite.png" id="1_uwrxv"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yqjtg"]
+texture = ExtResource("1_uwrxv")
+texture_region_size = Vector2i(12, 12)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6, -6, 6, -6, 6, 6, -6, 6)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6, -6, 6, -6, 6, 6, -6, 6)
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6, -6, 6, -6, 6, 6, -6, 6)
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6, -6, 6, -6, 6, 6, -6, 6)
+1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6, -6, 6, -6, 6, 6, -6, 6)
+2:1/0 = 0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6, -6, 6, -6, 6, 6, -6, 6)
+5:1/0 = 0
+0:2/0 = 0
+0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6, -6, 6, -6, 6, 6, -6, 6)
+1:2/0 = 0
+1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6, -6, 6, -6, 6, 6, -6, 6)
+2:2/0 = 0
+2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6, -6, 6, -6, 6, 6, -6, 6)
+3:2/0 = 0
+4:2/0 = 0
+5:2/0 = 0
+5:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6, -6, 6, -6, 6, 6, -6, 6)
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+6:2/0 = 0
+6:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6, -6, 6, -6, 6, 6, -6, 6)
+6:1/0 = 0
+7:1/0 = 0
+7:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6, -6, 6, -6, 6, 6, -6, 6)
+7:2/0 = 0
+7:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6, -6, 6, -6, 6, 6, -6, 6)
+4:1/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_lnu2h"]
+tile_size = Vector2i(12, 12)
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_yqjtg")
+
+[node name="game" type="Node2D" unique_id=991766009]
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=51122968]
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0, 0, 0, 1)
+
+[node name="TileMap" type="TileMap" parent="." unique_id=2006993949]
+tile_set = SubResource("TileSet_lnu2h")
+format = 2
