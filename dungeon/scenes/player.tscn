@@ -2,7 +2,6 @@
 
 [ext_resource type="Texture2D" uid="uid://cvtgbp1m4lfo7" path="res://assets/Witchcraft_sprite_sheet_v1_0/Sprite_sheets/Witchcraft_spr_1.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://dgycguitnb7g6" path="res://scripts/player.gd" id="1_g2els"]
-[ext_resource type="PackedScene" uid="uid://ckgrcx5alga06" path="res://scenes/spikes.tscn" id="3_dqkch"]
 [ext_resource type="Script" uid="uid://c4d12hstyge0x" path="res://scripts/camera_2d.gd" id="3_qhqgy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3vyb7"]
@@ -75,10 +74,7 @@ script = ExtResource("1_g2els")
 sprite_frames = SubResource("SpriteFrames_4r5pv")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.41428402
-
-[node name="Spikes" parent="AnimatedSprite2D" unique_id=1608333240 instance=ExtResource("3_dqkch")]
-position = Vector2(54, 125)
+frame_progress = 0.9323775
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2014202410]
 position = Vector2(-1, -0.5)
