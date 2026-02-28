@@ -28,4 +28,5 @@ func _physics_process(delta: float) -> void:
 		
 func _die():
 	DEAD = true
+	await get_tree().create_timer(0).timeout
 	get_tree().reload_current_scene()
