@@ -73,8 +73,11 @@ script = ExtResource("1_g2els")
 sprite_frames = SubResource("SpriteFrames_4r5pv")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.48395032
+frame_progress = 0.72839683
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2014202410]
 position = Vector2(-1, -0.5)
 shape = SubResource("RectangleShape2D_60mlk")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1794441146]
+zoom = Vector2(4, 4)
