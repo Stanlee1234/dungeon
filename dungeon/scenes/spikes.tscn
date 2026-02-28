@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://ckgrcx5alga06"]
 
 [ext_resource type="Texture2D" uid="uid://b2e8haxvgjvkd" path="res://assets/pixilart-sprite.png" id="1_5pg7g"]
+[ext_resource type="Script" uid="uid://dtkx3n4xkkkxa" path="res://scripts/spikes.gd" id="1_xbcdo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xbcdo"]
 atlas = ExtResource("1_5pg7g")
@@ -28,6 +29,7 @@ animations = [{
 size = Vector2(10, 5)
 
 [node name="Spikes" type="Area2D" unique_id=1608333240]
+script = ExtResource("1_xbcdo")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=754109034]
 sprite_frames = SubResource("SpriteFrames_kd5gq")
@@ -37,3 +39,5 @@ frame_progress = 0.6434719
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1664204371]
 position = Vector2(0, 2.5)
 shape = SubResource("RectangleShape2D_5pg7g")
+
+[connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]

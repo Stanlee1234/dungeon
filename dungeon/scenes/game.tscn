@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cahhsomq1gin2" path="res://assets/Dunjo/blacknwhite.png" id="1_uwrxv"]
 [ext_resource type="PackedScene" uid="uid://cyvr03yrg8pu5" path="res://scenes/player.tscn" id="2_yqjtg"]
+[ext_resource type="PackedScene" uid="uid://ckgrcx5alga06" path="res://scenes/spikes.tscn" id="3_lnu2h"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yqjtg"]
 texture = ExtResource("1_uwrxv")
@@ -71,3 +72,6 @@ layer_0/tile_data = PackedInt32Array(0, 0, 3, 1, 65536, 2, 3, 65536, 2, 4, 65536
 
 [node name="Player" parent="." unique_id=1944656749 instance=ExtResource("2_yqjtg")]
 position = Vector2(25, 112)
+
+[node name="Spikes" parent="." unique_id=1608333240 instance=ExtResource("3_lnu2h")]
+position = Vector2(54, 126)
