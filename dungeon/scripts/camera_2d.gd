@@ -5,4 +5,5 @@ var locked_y = 66
 
 func _process(_delta):
 	# Assuming the parent is the player
-	pass
+	var target_x = get_parent().global_position.x
+	global_position = Vector2(target_x, locked_y)
