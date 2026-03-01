@@ -61,25 +61,23 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk",
-"speed": 6.0
+"speed": 1.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_60mlk"]
-size = Vector2(10, 11)
+size = Vector2(8, 13)
 
 [node name="Player" type="CharacterBody2D" unique_id=1944656749]
 script = ExtResource("1_g2els")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=572536742]
-position = Vector2(0, 5.9604645e-08)
 scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_4r5pv")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.95983
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2014202410]
-position = Vector2(0, 0.5)
+position = Vector2(-1, -0.5)
 shape = SubResource("RectangleShape2D_60mlk")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1794441146]
