@@ -1,54 +1,35 @@
 extends Node2D
 
-@onready var player = $Player
-@onready var tilemap = $TileMapLayer
-@onready var camera = $Player/Camera2D 
-
-const TILE_SIZE = 12 
-const BLOCKS_TO_WALK = 10
+@onready var player = get_node_or_null("Player")
+@onready var tilemap = find_child("*TileMap*", true, false)
+@onready var camera = find_child("*Camera*", true, false)
 
 func _ready() -> void:
-	if not player or not tilemap or not camera:
+	if not player or not tilemap:
 		return
-	_start_intro()
+	_trigger_sequence()
 
-func _start_intro():
-	if player.has_method("set_physics_process"):
-		player.set_physics_process(false)
-	
-	var sprite = player.find_child("AnimatedSprite2D")
-	if sprite:
-		sprite.play("walk")
-
-	var target_x = player.global_position.x + (BLOCKS_TO_WALK * TILE_SIZE)
-	var walk_tween = create_tween()
-	
-	walk_tween.tween_property(player, "global_position:x", target_x, 2.0)
-	
-	await walk_tween.finished
-	
-	if sprite:
-		sprite.play("idle")
-	
+func _trigger_sequence():
 	var shake_duration = 1.5
 	var shake_intensity = 4.0
 	var timer = 0.0
 	
-	while timer < shake_duration:
-		camera.offset = Vector2(randf_range(-shake_intensity, shake_intensity), randf_range(-shake_intensity, shake_intensity))
-		timer += get_process_delta_time()
-		await get_tree().process_frame
+	if camera:
+		while timer < shake_duration:
+			camera.offset = Vector2(randf_range(-shake_intensity, shake_intensity), randf_range(-shake_intensity, shake_intensity))
+			timer += get_process_delta_time()
+			await get_tree().process_frame
+		camera.offset = Vector2.ZERO
 	
-	camera.offset = Vector2.ZERO
+	var local_pos = tilemap.to_local(player.global_position)
+	var player_tile = tilemap.local_to_map(local_pos)
 	
-	var player_tile = tilemap.local_to_map(player.global_position)
-	
-	for x in range(-3, 4):
-		for y in range(0, 5):
-			tilemap.set_cell(Vector2i(player_tile.x + x, player_tile.y + y), -1)
-
-	player.set_physics_process(true)
-	player.velocity.x = 0 
+	for x in range(-5, 6):
+		for y in range(0, 15):
+			var target_cell = Vector2i(player_tile.x + x, player_tile.y + y)
+			# For TileMap: set_cell(layer, coords, source_id, atlas_coords)
+			# Layer 0 is usually the main floor layer
+			tilemap.set_cell(0, target_cell, -1)
 	
 	await get_tree().create_timer(3.0).timeout
 	get_tree().change_scene_to_file("res://game.tscn")
