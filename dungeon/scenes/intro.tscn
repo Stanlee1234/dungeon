@@ -4,7 +4,6 @@
 [ext_resource type="PackedScene" uid="uid://cyvr03yrg8pu5" path="res://scenes/player.tscn" id="1_yjqpq"]
 [ext_resource type="Texture2D" uid="uid://cahhsomq1gin2" path="res://assets/Dunjo/blacknwhite.png" id="2_4bx60"]
 [ext_resource type="Texture2D" uid="uid://4oa18f28ccmt" path="res://assets/Free 1 Bit Forest/PNG/Tileset.png" id="3_4bx60"]
-[ext_resource type="Texture2D" uid="uid://3ga1nh0e46yi" path="res://assets/Free 1 Bit Forest/PNG/Trees_and_etc.png" id="4_i2l1n"]
 [ext_resource type="FontFile" uid="uid://djtt7fo1qs5vj" path="res://assets/PixelOperator8.ttf" id="5_wfs7u"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_i2l1n"]
@@ -229,10 +228,6 @@ texture = ExtResource("3_4bx60")
 14:7/0 = 0
 14:6/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0naf5"]
-texture = ExtResource("4_i2l1n")
-texture_region_size = Vector2i(12, 12)
-
 [sub_resource type="TileSet" id="TileSet_es01l"]
 tile_size = Vector2i(12, 12)
 physics_layer_0/collision_layer = 1
@@ -247,7 +242,6 @@ custom_data_layer_3/type = 1
 sources/0 = SubResource("TileSetAtlasSource_i2l1n")
 sources/1 = SubResource("TileSetAtlasSource_wfs7u")
 sources/2 = SubResource("TileSetAtlasSource_es01l")
-sources/3 = SubResource("TileSetAtlasSource_0naf5")
 
 [node name="intro" type="Node2D" unique_id=774987273]
 script = ExtResource("1_es01l")
@@ -314,3 +308,14 @@ text = "Get the key, then
  unlock the door"
 horizontal_alignment = 1
 justification_flags = 160
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=770800683]
+
+[node name="FadeOverlay" type="ColorRect" parent="CanvasLayer" unique_id=1031222975]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
