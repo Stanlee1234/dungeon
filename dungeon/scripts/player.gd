@@ -4,16 +4,15 @@ const SPEED = 100.0
 const JUMP_VELOCITY = -200.0
 const CLIMB_SPEED = -80.0
 const SLIDE_SPEED = 40.0
-const COYOTE_TIME_MAX = 0.15 # 0.15 seconds of "grace" time
+const COYOTE_TIME_MAX = 0.15
 
 # State variables
 var DEAD = false
 var on_chain = false
 var is_climbing = false
 var keys_collected = 0
-var coyote_timer = 0.0 # How much coyote time is left
+var coyote_timer = 0.0
 
-# Track the last tile processed
 var last_tile_pos = Vector2i(-1, -1) 
 
 @onready var sprite = $AnimatedSprite2D
@@ -39,11 +38,9 @@ func _check_for_tile_data():
 	var tile_data = tilemap.get_cell_tile_data(map_pos)
 
 	if tile_data:
-		# 1. DANGER CHECK
 		if tile_data.get_custom_data("is_danger") == true:
 			_die()
 		
-		# 2. KEY & DOOR LOGIC
 		if map_pos != last_tile_pos:
 			if tile_data.get_custom_data("is_key") == true:
 				keys_collected += 1
@@ -56,7 +53,6 @@ func _check_for_tile_data():
 					tilemap.set_cell(map_pos, 0, Vector2i(6, 1))
 					last_tile_pos = map_pos
 		
-		# 3. CHAIN LOGIC
 		if tile_data.get_custom_data("is_chain") == true:
 			if not on_chain:
 				is_climbing = true
@@ -74,22 +70,19 @@ func _exit_chain():
 	is_climbing = false
 
 func _handle_normal_movement(delta):
-	# Update Coyote Timer
 	if is_on_floor():
 		coyote_timer = COYOTE_TIME_MAX
 	else:
 		coyote_timer -= delta
 
-	# Apply Gravity
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
-	# Jump Logic (Using coyote_timer instead of is_on_floor)
 	if Input.is_action_just_pressed("ui_up") and coyote_timer > 0:
 		velocity.y = JUMP_VELOCITY
-		coyote_timer = 0 # Prevent double jumping in mid-air
+		coyote_timer = 0
 
-	# Horizontal Movement
+
 	var direction := Input.get_axis("ui_left", "ui_right")
 	if direction:
 		velocity.x = direction * SPEED
