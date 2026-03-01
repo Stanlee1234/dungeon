@@ -90,6 +90,7 @@ sources/1 = SubResource("TileSetAtlasSource_wfs7u")
 [node name="intro" type="Node2D" unique_id=774987273]
 
 [node name="Parallax2D" type="Parallax2D" parent="." unique_id=937884768]
+repeat_size = Vector2(1152, 0)
 
 [node name="Layer0" type="Sprite2D" parent="Parallax2D" unique_id=1738751778]
 texture = ExtResource("1_4bx60")
