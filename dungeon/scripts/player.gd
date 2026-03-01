@@ -9,6 +9,7 @@ var DEAD = false
 var on_chain = false
 var is_climbing = false
 var keys_collected = 0
+var last_tile_pos = Vector2i(-1, -1) 
 
 @onready var sprite = $AnimatedSprite2D
 
@@ -28,40 +29,45 @@ func _check_for_tile_data():
 	var tilemap = get_parent().find_child("TileMapLayer", true, false)
 	if not tilemap: return
 
-	var map_pos = tilemap.local_to_map(global_position)
+	# We check slightly higher than the feet to prevent "edge bouncing"
+	var check_pos = global_position + Vector2(0, -4)
+	var map_pos = tilemap.local_to_map(check_pos)
 	var tile_data = tilemap.get_cell_tile_data(map_pos)
 
 	if tile_data:
-		# Kill the player
+		# Danger Check
 		if tile_data.get_custom_data("is_danger") == true:
 			_die()
 		
-		# Collect a key
-		if tile_data.get_custom_data("is_key") == true:
-			keys_collected += 1
-			tilemap.set_cell(map_pos, -1)
-			print("Keys collected: ", keys_collected)
-
-		# Open a door
-		if tile_data.get_custom_data("is_door") == true:
-			if keys_collected > 0:
-				keys_collected -= 1
+		# Key/Door Logic
+		if map_pos != last_tile_pos:
+			if tile_data.get_custom_data("is_key") == true:
+				keys_collected += 1
 				tilemap.set_cell(map_pos, -1)
-				print("Door opened! Keys remaining: ", keys_collected)
+				last_tile_pos = map_pos
+
+			if tile_data.get_custom_data("is_door") == true:
+				if keys_collected > 0:
+					keys_collected -= 1
+					tilemap.set_cell(map_pos, -1)
+					last_tile_pos = map_pos
 		
-		# Chain logic
+		# Chain logic - Force exit if the specific tile isn't a chain
 		if tile_data.get_custom_data("is_chain") == true:
 			if not on_chain:
 				is_climbing = true
 			on_chain = true
 		else:
-			_handle_chain_exit()
+			_exit_chain()
 	else:
-		_handle_chain_exit()
+		# If there is NO tile at all, we must fall off
+		_exit_chain()
+		last_tile_pos = map_pos
 
-func _handle_chain_exit():
+func _exit_chain():
 	if on_chain:
-		velocity.y = JUMP_VELOCITY
+		# Small velocity boost to ensure we clear the tile area
+		velocity.y = 0 
 	on_chain = false
 	is_climbing = false
 
