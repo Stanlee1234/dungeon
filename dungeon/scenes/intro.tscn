@@ -277,18 +277,6 @@ use_parent_material = true
 position = Vector2(0, 136)
 tile_set = SubResource("TileSet_es01l")
 
-[node name="Label2" type="Label" parent="." unique_id=2008912906]
-modulate = Color(0, 0, 0, 1)
-offset_left = -348.0
-offset_top = 182.0
-offset_right = -248.0
-offset_bottom = 194.0
-theme_override_fonts/font = ExtResource("5_wfs7u")
-theme_override_font_sizes/font_size = 8
-text = "What a nice day!"
-horizontal_alignment = 1
-justification_flags = 160
-
 [node name="Label" type="Label" parent="." unique_id=706789029]
 modulate = Color(0, 0, 0, 1)
 offset_left = -160.0
@@ -298,19 +286,6 @@ offset_bottom = 100.0
 theme_override_fonts/font = ExtResource("5_wfs7u")
 theme_override_font_sizes/font_size = 8
 text = "Watch out for fire!"
-horizontal_alignment = 1
-justification_flags = 160
-
-[node name="Label" type="Label" parent="Label" unique_id=1481703196]
-modulate = Color(0, 0, 0, 1)
-layout_mode = 0
-offset_left = -174.0
-offset_top = 91.0
-offset_right = -74.0
-offset_bottom = 103.0
-theme_override_fonts/font = ExtResource("5_wfs7u")
-theme_override_font_sizes/font_size = 8
-text = "What a nice day!"
 horizontal_alignment = 1
 justification_flags = 160
 
@@ -327,19 +302,6 @@ key to climb chains"
 horizontal_alignment = 1
 justification_flags = 160
 
-[node name="Label" type="Label" parent="Label3" unique_id=425073201]
-modulate = Color(0, 0, 0, 1)
-layout_mode = 0
-offset_left = -174.0
-offset_top = 91.0
-offset_right = -74.0
-offset_bottom = 103.0
-theme_override_fonts/font = ExtResource("5_wfs7u")
-theme_override_font_sizes/font_size = 8
-text = "What a nice day!"
-horizontal_alignment = 1
-justification_flags = 160
-
 [node name="Label4" type="Label" parent="." unique_id=1630840207]
 modulate = Color(0, 0, 0, 1)
 offset_left = 16.0
@@ -350,18 +312,5 @@ theme_override_fonts/font = ExtResource("5_wfs7u")
 theme_override_font_sizes/font_size = 8
 text = "Get the key, then
  unlock the door"
-horizontal_alignment = 1
-justification_flags = 160
-
-[node name="Label" type="Label" parent="Label4" unique_id=1163664149]
-modulate = Color(0, 0, 0, 1)
-layout_mode = 0
-offset_left = -174.0
-offset_top = 91.0
-offset_right = -74.0
-offset_bottom = 103.0
-theme_override_fonts/font = ExtResource("5_wfs7u")
-theme_override_font_sizes/font_size = 8
-text = "What a nice day!"
 horizontal_alignment = 1
 justification_flags = 160
