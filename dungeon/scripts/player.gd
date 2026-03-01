@@ -15,7 +15,6 @@ const SLIDE_SPEED = 40.0
 const COYOTE_TIME_MAX = 0.15
 const TILE_SIZE = 12
 const BLOCKS_TO_WALK = 30
-const TEXT_DISTANCE = 10
 
 var DEAD = false
 var has_control = true
@@ -27,7 +26,6 @@ var last_tile_pos = Vector2i(-1, -1)
 
 var start_x = 0.0
 var sequence_triggered = false
-var text_triggered = false
 var is_falling = false
 var fall_start_y = 0.0
 var max_fall_distance = 0.0
@@ -38,17 +36,16 @@ func _ready() -> void:
 	start_x = global_position.x
 	last_door_pos = global_position
 	if tutorial_label:
-		tutorial_label.modulate.a = 0.0
-		tutorial_label.visible = true
+		tutorial_label.visible = false
 
 func _physics_process(delta: float) -> void:
-	if DEAD: return
+	if DEAD or not has_control: return
 	if not sprite:
 		move_and_slide()
 		return
 
 	_check_for_tile_data()
-	_check_movement_distance()
+	_check_tutorial_distance()
 
 	if is_climbing:
 		_handle_chain_logic()
@@ -58,18 +55,9 @@ func _physics_process(delta: float) -> void:
 	_handle_landing_rumble()
 	move_and_slide()
 
-func _check_movement_distance():
-	var distance = abs(global_position.x - start_x)
-	
-	# 1. Show text after 10 blocks (Fades in once)
-	if not text_triggered and distance >= TEXT_DISTANCE * TILE_SIZE:
-		text_triggered = true
-		if tutorial_label:
-			var tween = create_tween()
-			tween.tween_property(tutorial_label, "modulate:a", 1.0, 0.5)
-	
-	# 2. Trigger earthquake after 30 blocks (Only in intro scene)
+func _check_tutorial_distance():
 	if get_tree().current_scene.name == "intro" and not sequence_triggered:
+		var distance = abs(global_position.x - start_x)
 		if distance >= BLOCKS_TO_WALK * TILE_SIZE:
 			sequence_triggered = true
 			is_falling = true
@@ -138,7 +126,7 @@ func _check_for_tile_data():
 
 func _exit_chain():
 	if on_chain:
-		if has_control and Input.is_action_pressed("ui_up"):
+		if has_control and Input.is_action_pressed("up"):
 			velocity.y = JUMP_VELOCITY
 		else:
 			velocity.y = 0 
@@ -155,10 +143,10 @@ func _handle_normal_movement(delta):
 	var direction = 0.0
 
 	if has_control:
-		if Input.is_action_just_pressed("ui_up") and coyote_timer > 0:
+		if Input.is_action_just_pressed("up") and coyote_timer > 0:
 			velocity.y = JUMP_VELOCITY
 			coyote_timer = 0
-		direction = Input.get_axis("ui_left", "ui_right")
+		direction = Input.get_axis("left", "right")
 
 	if direction:
 		velocity.x = direction * SPEED
@@ -171,8 +159,8 @@ func _handle_normal_movement(delta):
 func _handle_chain_logic():
 	var horizontal_dir = 0.0
 	if has_control:
-		horizontal_dir = Input.get_axis("ui_left", "ui_right")
-		if Input.is_action_pressed("ui_up"):
+		horizontal_dir = Input.get_axis("left", "right")
+		if Input.is_action_pressed("up"):
 			velocity.y = CLIMB_SPEED
 			sprite.play("walk")
 		else:
@@ -212,9 +200,14 @@ func _respawn_player():
 
 func _on_win_body_entered(body: Node2D) -> void:
 	if body == self:
-		call_deferred("_change_the_scene")
+		has_control = false
+		velocity = Vector2.ZERO
+		sprite.play("idle")
+		_change_the_scene()
 
 func _change_the_scene():
+	# Wait for 2 seconds while the screen is black
+	await get_tree().create_timer(2.0).timeout
 	var current_scene = get_tree().current_scene.name
 	if current_scene == "level1":
 		get_tree().change_scene_to_file("res://scenes/level2.tscn")
