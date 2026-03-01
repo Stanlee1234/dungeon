@@ -1,3 +1,105 @@
 [gd_scene format=3 uid="uid://bbvauc1riud00"]
 
+[ext_resource type="Texture2D" uid="uid://c2vok6s72cpis" path="res://assets/Free 1 Bit Forest/PNG/Layer0.png" id="1_4bx60"]
+[ext_resource type="PackedScene" uid="uid://cyvr03yrg8pu5" path="res://scenes/player.tscn" id="1_yjqpq"]
+[ext_resource type="Texture2D" uid="uid://cahhsomq1gin2" path="res://assets/Dunjo/blacknwhite.png" id="2_4bx60"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_i2l1n"]
+texture = ExtResource("2_4bx60")
+texture_region_size = Vector2i(12, 12)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6, -6, 6, -6, 6, 6, -6, 6)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6, -6, 6, -6, 6, 6, -6, 6)
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6, -6, 6, -6, 6, 6, -6, 6)
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6, -6, 6, -6, 6, 6, -6, 6)
+1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6, -6, 6, -6, 6, 6, -6, 6)
+2:1/0 = 0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6, -6, 6, -6, 6, 6, -6, 6)
+0:2/0 = 0
+0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6, -6, 6, -6, 6, 6, -6, 6)
+1:2/0 = 0
+1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6, -6, 6, -6, 6, 6, -6, 6)
+2:2/0 = 0
+2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6, -6, 6, -6, 6, 6, -6, 6)
+4:2/0 = 0
+5:2/0 = 0
+5:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6, -6, 6, -6, 6, 6, -6, 6)
+0:3/0 = 0
+0:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6, -6, 6, -6, 6, 6, -6, 6)
+1:3/0 = 0
+1:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6, -6, 6, -6, 6, 6, -6, 6)
+2:3/0 = 0
+2:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6, -6, 6, -6, 6, 6, 6, 6, -4.5, 0)
+3:3/0 = 0
+3:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(6, -6, -6, -6, -6, 6, -6, 6, 4.5, 0)
+6:2/0 = 0
+6:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6, -6, 6, -6, 6, 6, -6, 6)
+6:1/0 = 0
+7:1/0 = 0
+7:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(2, -6, 4, -6, 4, 5, 2, 5)
+7:1/0/custom_data_3 = true
+7:2/0 = 0
+7:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(2, -6, 2, -6, 2, 6, 2, 6)
+7:2/0/custom_data_0 = true
+4:1/0 = 0
+0:4/0 = 0
+0:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6, -6, 6, -6, 6, 6, -6, 6)
+1:4/0 = 0
+1:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6, -6, 6, -6, 6, 6, -6, 6)
+2:4/0 = 0
+2:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6, -6, 6, -6, 6, 6, 6, 0, -6, 0)
+3:4/0 = 0
+3:2/0 = 0
+3:2/0/custom_data_1 = true
+5:1/0 = 0
+5:1/0/custom_data_2 = true
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_yqjtg"]
+load_path = "res://.godot/imported/New Piskel (1).png-522a3aa58e81337293790df667f48676.ctex"
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wfs7u"]
+texture = SubResource("CompressedTexture2D_yqjtg")
+texture_region_size = Vector2i(12, 12)
+0:0/animation_columns = 3
+0:0/animation_speed = 1.8
+0:0/animation_mode = 1
+0:0/animation_frame_0/duration = 0.2
+0:0/animation_frame_1/duration = 0.2
+0:0/animation_frame_2/duration = 0.2
+0:0/0 = 0
+0:0/0/custom_data_1 = true
+
+[sub_resource type="TileSet" id="TileSet_es01l"]
+tile_size = Vector2i(12, 12)
+physics_layer_0/collision_layer = 1
+custom_data_layer_0/name = "is_chain"
+custom_data_layer_0/type = 1
+custom_data_layer_1/name = "is_danger"
+custom_data_layer_1/type = 1
+custom_data_layer_2/name = "is_key"
+custom_data_layer_2/type = 1
+custom_data_layer_3/name = "is_door"
+custom_data_layer_3/type = 1
+sources/0 = SubResource("TileSetAtlasSource_i2l1n")
+sources/1 = SubResource("TileSetAtlasSource_wfs7u")
+
 [node name="intro" type="Node2D" unique_id=774987273]
+
+[node name="Parallax2D" type="Parallax2D" parent="." unique_id=937884768]
+
+[node name="Layer0" type="Sprite2D" parent="Parallax2D" unique_id=1738751778]
+texture = ExtResource("1_4bx60")
+
+[node name="Player" parent="." unique_id=1944656749 instance=ExtResource("1_yjqpq")]
+
+[node name="TileMap" type="TileMap" parent="." unique_id=1644270730]
+tile_set = SubResource("TileSet_es01l")
+format = 2
+
+[node name="TileMapLayer" type="TileMapLayer" parent="TileMap" unique_id=1949787841]
+use_parent_material = true
+tile_set = SubResource("TileSet_es01l")
