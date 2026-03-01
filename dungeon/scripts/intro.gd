@@ -15,7 +15,6 @@ func _trigger_sequence(player_node):
 	
 	if camera:
 		if player_node.has_node("RumbleSound"):
-			print("DEBUG: Playing rumble.wav for Intro Animation.")
 			player_node.get_node("RumbleSound").play()
 			
 		var timer = get_tree().create_timer(shake_duration)

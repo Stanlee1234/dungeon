@@ -240,9 +240,9 @@ script = SubResource("GDScript_eqxsl")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=51122968]
 offset_left = -1834.0
-offset_top = -1338.0
+offset_top = -1422.0
 offset_right = 3458.0
-offset_bottom = 2514.0
+offset_bottom = 2430.0
 color = Color(0, 0, 0, 1)
 
 [node name="Win" type="Area2D" parent="." unique_id=1088214566]

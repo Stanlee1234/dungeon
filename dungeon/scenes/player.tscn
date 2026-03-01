@@ -5,6 +5,8 @@
 [ext_resource type="Script" uid="uid://c4d12hstyge0x" path="res://scripts/camera_2d.gd" id="3_qhqgy"]
 [ext_resource type="AudioStream" uid="uid://c1ro0ox4iy3kv" path="res://assets/death.mp3" id="4_qlg0r"]
 [ext_resource type="AudioStream" uid="uid://cxctk58mvrt5k" path="res://assets/rumble.wav" id="5_tuyoq"]
+[ext_resource type="FontFile" uid="uid://b4i1vb0si5fdg" path="res://assets/Minecraft.ttf" id="6_tuyoq"]
+[ext_resource type="Script" uid="uid://c10vwtbs6m5bt" path="res://scripts/timer_label.gd" id="7_fjrip"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dqkch"]
 atlas = ExtResource("2_qhqgy")
@@ -95,9 +97,19 @@ shape = SubResource("RectangleShape2D_60mlk")
 zoom = Vector2(5, 5)
 script = ExtResource("3_qhqgy")
 
-[node name="DeathSound" type="AudioStreamPlayer2D" parent="." unique_id=1755863091]
+[node name="DeathSound" type="AudioStreamPlayer" parent="." unique_id=1247550181]
 stream = ExtResource("4_qlg0r")
 
-[node name="RumbleSound" type="AudioStreamPlayer2D" parent="." unique_id=1600795780]
+[node name="RumbleSound" type="AudioStreamPlayer" parent="." unique_id=901367891]
 stream = ExtResource("5_tuyoq")
 volume_db = 24.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1135445526]
+
+[node name="TimerLabel" type="Label" parent="CanvasLayer" unique_id=589293442]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0.43529412, 0.827451, 0.99607843, 1)
+theme_override_fonts/font = ExtResource("6_tuyoq")
+theme_override_font_sizes/font_size = 25
+script = ExtResource("7_fjrip")

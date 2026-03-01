@@ -3,10 +3,10 @@ extends CharacterBody2D
 @onready var sprite = find_child("*AnimatedSprite2D*", true, false)
 @onready var camera = find_child("*Camera2D*", true, false)
 @onready var tilemap = get_parent().find_child("*TileMapLayer*", true, false)
-@onready var death_sound = $DeathSound
-@onready var rumble_sound = $RumbleSound
-@onready var tutorial_label = $TutorialLabel
-@onready var tutorial_label2 = $TutorialLabel2
+@onready var tutorial_label = find_child("TutorialLabel", true, false)
+
+var death_sound: Node
+var rumble_sound: Node
 
 const SPEED = 75.0
 const JUMP_VELOCITY = -190.0
@@ -35,22 +35,32 @@ var collected_keys_coords = []
 func _ready() -> void:
 	start_x = global_position.x
 	last_door_pos = global_position
-	if tutorial_label:
-		tutorial_label.visible = false
+	death_sound = find_child("DeathSound", true, false)
+	rumble_sound = find_child("RumbleSound", true, false)
+	
+	var scene_name = get_tree().current_scene.name.to_lower()
+	if "level" in scene_name:
+		GlobalTimer.timer_active = true
+		if scene_name == "level1":
+			GlobalTimer.time_passed = 0.0
 
 func _physics_process(delta: float) -> void:
-	if DEAD or not has_control: return
+	if DEAD: return
 	if not sprite:
 		move_and_slide()
 		return
 
+	if not is_on_floor() and not is_climbing:
+		velocity += get_gravity() * delta * 0.8
+
 	_check_for_tile_data()
 	_check_tutorial_distance()
 
-	if is_climbing:
-		_handle_chain_logic()
-	else:
-		_handle_normal_movement(delta)
+	if has_control:
+		if is_climbing:
+			_handle_chain_logic()
+		else:
+			_handle_normal_movement(delta)
 
 	_handle_landing_rumble()
 	move_and_slide()
@@ -138,10 +148,8 @@ func _handle_normal_movement(delta):
 		coyote_timer = COYOTE_TIME_MAX
 	else:
 		coyote_timer -= delta
-		velocity += get_gravity() * delta * 0.8
 
 	var direction = 0.0
-
 	if has_control:
 		if Input.is_action_just_pressed("up") and coyote_timer > 0:
 			velocity.y = JUMP_VELOCITY
@@ -153,7 +161,6 @@ func _handle_normal_movement(delta):
 		sprite.flip_h = direction < 0
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
-
 	_update_animations(direction)
 
 func _handle_chain_logic():
@@ -186,7 +193,9 @@ func _update_animations(direction):
 		sprite.play("idle")
 
 func _respawn_player():
-	if death_sound: death_sound.play()
+	if death_sound and death_sound.has_method("play"):
+		death_sound.play()
+	
 	for coord in collected_keys_coords:
 		tilemap.set_cell(coord, 0, Vector2i(5, 1))
 	
@@ -200,13 +209,14 @@ func _respawn_player():
 
 func _on_win_body_entered(body: Node2D) -> void:
 	if body == self:
+		if get_tree().current_scene.name == "level2":
+			GlobalTimer.timer_active = false
 		has_control = false
 		velocity = Vector2.ZERO
 		sprite.play("idle")
 		_change_the_scene()
 
 func _change_the_scene():
-	# Wait for 2 seconds while the screen is black
 	await get_tree().create_timer(2.0).timeout
 	var current_scene = get_tree().current_scene.name
 	if current_scene == "level1":
