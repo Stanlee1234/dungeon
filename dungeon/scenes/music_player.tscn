@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://cq6jum5dkopwi"]
+
+[ext_resource type="AudioStream" uid="uid://e07fkqi5iwn0" path="res://assets/Subterranean_Echoes.mp3" id="1_jxdhu"]
+
+[node name="MusicPlayer" type="Node2D" unique_id=1289460770]
+
+[node name="SubterraneanEchoes" type="AudioStreamPlayer" parent="." unique_id=1992249508]
+stream = ExtResource("1_jxdhu")
+autoplay = true

@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 buses/default_bus_layout=""
 
+[autoload]
+
+MusicPlayer="*uid://cq6jum5dkopwi"
+
 [display]
 
 window/stretch/mode="canvas_items"
