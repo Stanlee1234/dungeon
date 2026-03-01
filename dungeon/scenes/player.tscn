@@ -83,12 +83,12 @@ scale = Vector2(0.65000004, 0.7058823)
 sprite_frames = SubResource("SpriteFrames_4r5pv")
 animation = &"walk"
 autoplay = "idle"
-frame_progress = 0.6003031
+frame_progress = 0.16104001
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2014202410]
 position = Vector2(-0.25, 1.5)
 shape = SubResource("RectangleShape2D_60mlk")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1794441146]
-zoom = Vector2(10, 10)
+zoom = Vector2(5, 5)
 script = ExtResource("3_qhqgy")
