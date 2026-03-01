@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="dungeon"
-run/main_scene="uid://cd4651b5r4pau"
+run/main_scene="uid://dkkj18uw6oa41"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -31,3 +31,4 @@ window/stretch/mode="canvas_items"
 
 textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"
+2d/snap/snap_2d_vertices_to_pixel=true
