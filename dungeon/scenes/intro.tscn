@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://bbvauc1riud00"]
 
-[ext_resource type="Texture2D" uid="uid://c2vok6s72cpis" path="res://assets/Free 1 Bit Forest/PNG/Layer0.png" id="1_4bx60"]
 [ext_resource type="PackedScene" uid="uid://cyvr03yrg8pu5" path="res://scenes/player.tscn" id="1_yjqpq"]
 [ext_resource type="Texture2D" uid="uid://cahhsomq1gin2" path="res://assets/Dunjo/blacknwhite.png" id="2_4bx60"]
 
@@ -89,13 +88,14 @@ sources/1 = SubResource("TileSetAtlasSource_wfs7u")
 
 [node name="intro" type="Node2D" unique_id=774987273]
 
-[node name="Parallax2D" type="Parallax2D" parent="." unique_id=937884768]
-repeat_size = Vector2(1152, 0)
-
-[node name="Layer0" type="Sprite2D" parent="Parallax2D" unique_id=1738751778]
-texture = ExtResource("1_4bx60")
+[node name="ColorRect" type="ColorRect" parent="." unique_id=466110718]
+offset_left = -1842.0
+offset_top = -1338.0
+offset_right = 3450.0
+offset_bottom = 2514.0
 
 [node name="Player" parent="." unique_id=1944656749 instance=ExtResource("1_yjqpq")]
+position = Vector2(0, 40)
 
 [node name="TileMap" type="TileMap" parent="." unique_id=1644270730]
 tile_set = SubResource("TileSet_es01l")
