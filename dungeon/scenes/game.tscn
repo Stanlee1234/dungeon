@@ -96,7 +96,7 @@ offset_bottom = 2514.0
 color = Color(0, 0, 0, 1)
 
 [node name="Player" parent="." unique_id=1944656749 instance=ExtResource("2_yqjtg")]
-position = Vector2(848, 112)
+position = Vector2(40, -32)
 
 [node name="TileMap" type="TileMap" parent="." unique_id=2006993949]
 tile_set = SubResource("TileSet_lnu2h")
