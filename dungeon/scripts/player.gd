@@ -13,6 +13,7 @@ const TILE_SIZE = 12
 const BLOCKS_TO_WALK = 30
 
 var DEAD = false
+var has_control = true
 var on_chain = false
 var is_climbing = false
 var keys_collected = 0
@@ -50,10 +51,16 @@ func _physics_process(delta: float) -> void:
 func _check_tutorial_distance():
 	if get_tree().current_scene.name == "intro" and not sequence_triggered:
 		var distance = abs(global_position.x - start_x)
+		
 		if distance >= BLOCKS_TO_WALK * TILE_SIZE:
+			print("DEBUG: 30 Blocks reached! Telling intro to break ground.")
 			sequence_triggered = true
-			if get_parent().has_method("_trigger_sequence"):
-				get_parent()._trigger_sequence()
+			
+			var intro_scene = get_tree().current_scene
+			if intro_scene.has_method("_trigger_sequence"):
+				intro_scene._trigger_sequence(self) 
+			else:
+				print("DEBUG ERROR: _trigger_sequence missing on intro root!")
 
 func _handle_landing_rumble():
 	if not is_on_floor():
