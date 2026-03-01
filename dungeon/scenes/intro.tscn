@@ -2,6 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://cyvr03yrg8pu5" path="res://scenes/player.tscn" id="1_yjqpq"]
 [ext_resource type="Texture2D" uid="uid://cahhsomq1gin2" path="res://assets/Dunjo/blacknwhite.png" id="2_4bx60"]
+[ext_resource type="Texture2D" uid="uid://4oa18f28ccmt" path="res://assets/Free 1 Bit Forest/PNG/Tileset.png" id="3_4bx60"]
+[ext_resource type="Texture2D" uid="uid://3ga1nh0e46yi" path="res://assets/Free 1 Bit Forest/PNG/Trees_and_etc.png" id="4_i2l1n"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_i2l1n"]
 texture = ExtResource("2_4bx60")
@@ -72,6 +74,98 @@ texture_region_size = Vector2i(12, 12)
 0:0/0 = 0
 0:0/0/custom_data_1 = true
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_es01l"]
+texture = ExtResource("3_4bx60")
+texture_region_size = Vector2i(12, 12)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+8:0/0 = 0
+9:0/0 = 0
+10:0/0 = 0
+11:0/0 = 0
+12:0/0 = 0
+13:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+7:1/0 = 0
+8:1/0 = 0
+9:1/0 = 0
+10:1/0 = 0
+11:1/0 = 0
+12:1/0 = 0
+13:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+5:2/0 = 0
+6:2/0 = 0
+7:2/0 = 0
+8:2/0 = 0
+9:2/0 = 0
+10:2/0 = 0
+11:2/0 = 0
+12:2/0 = 0
+13:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+4:3/0 = 0
+5:3/0 = 0
+6:3/0 = 0
+7:3/0 = 0
+8:3/0 = 0
+9:3/0 = 0
+10:3/0 = 0
+11:3/0 = 0
+12:3/0 = 0
+13:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+4:4/0 = 0
+5:4/0 = 0
+6:4/0 = 0
+7:4/0 = 0
+8:4/0 = 0
+9:4/0 = 0
+10:4/0 = 0
+11:4/0 = 0
+12:4/0 = 0
+13:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+3:5/0 = 0
+4:5/0 = 0
+5:5/0 = 0
+6:5/0 = 0
+7:5/0 = 0
+8:5/0 = 0
+9:5/0 = 0
+10:5/0 = 0
+11:5/0 = 0
+12:5/0 = 0
+13:5/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0naf5"]
+texture = ExtResource("4_i2l1n")
+texture_region_size = Vector2i(12, 12)
+
 [sub_resource type="TileSet" id="TileSet_es01l"]
 tile_size = Vector2i(12, 12)
 physics_layer_0/collision_layer = 1
@@ -85,19 +179,26 @@ custom_data_layer_3/name = "is_door"
 custom_data_layer_3/type = 1
 sources/0 = SubResource("TileSetAtlasSource_i2l1n")
 sources/1 = SubResource("TileSetAtlasSource_wfs7u")
+sources/2 = SubResource("TileSetAtlasSource_es01l")
+sources/3 = SubResource("TileSetAtlasSource_0naf5")
 
 [node name="intro" type="Node2D" unique_id=774987273]
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=466110718]
 offset_left = -1842.0
-offset_top = -1338.0
-offset_right = 3450.0
-offset_bottom = 2514.0
+offset_top = -5774.0
+offset_right = 7676.0
+
+[node name="ColorRect2" type="ColorRect" parent="." unique_id=1157998427]
+offset_left = -1824.0
+offset_right = 7546.0
+offset_bottom = 2896.0
+color = Color(0, 0, 0, 1)
 
 [node name="Player" parent="." unique_id=1944656749 instance=ExtResource("1_yjqpq")]
-position = Vector2(0, 40)
 
 [node name="TileMap" type="TileMap" parent="." unique_id=1644270730]
+modulate = Color(0.07450981, 0.35686275, 0.96862745, 1)
 tile_set = SubResource("TileSet_es01l")
 format = 2
 
