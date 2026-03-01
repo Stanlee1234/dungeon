@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://dgycguitnb7g6" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://cna7ibkbnptff" path="res://assets/New Piskel (2).png" id="2_qhqgy"]
 [ext_resource type="Script" uid="uid://c4d12hstyge0x" path="res://scripts/camera_2d.gd" id="3_qhqgy"]
+[ext_resource type="AudioStream" uid="uid://c1ro0ox4iy3kv" path="res://assets/death.mp3" id="4_qlg0r"]
+[ext_resource type="AudioStream" uid="uid://cxctk58mvrt5k" path="res://assets/rumble.wav" id="5_tuyoq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dqkch"]
 atlas = ExtResource("2_qhqgy")
@@ -100,3 +102,10 @@ script = ExtResource("3_qhqgy")
 [node name="SubterraneanEchoes" type="AudioStreamPlayer" parent="." unique_id=1749482351]
 stream = SubResource("AudioStreamMP3_qhqgy")
 autoplay = true
+
+[node name="DeathSound" type="AudioStreamPlayer2D" parent="." unique_id=1755863091]
+stream = ExtResource("4_qlg0r")
+
+[node name="RumbleSound" type="AudioStreamPlayer2D" parent="." unique_id=1600795780]
+stream = ExtResource("5_tuyoq")
+volume_db = 24.0
