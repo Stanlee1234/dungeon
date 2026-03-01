@@ -4,8 +4,8 @@ extends CharacterBody2D
 @onready var camera = find_child("*Camera2D*", true, false)
 @onready var tilemap = get_parent().find_child("*TileMapLayer*", true, false)
 
-const SPEED = 100.0
-const JUMP_VELOCITY = -200.0
+const SPEED = 75.0
+const JUMP_VELOCITY = -190.0
 const CLIMB_SPEED = -80.0
 const SLIDE_SPEED = 40.0
 const COYOTE_TIME_MAX = 0.15
@@ -103,6 +103,7 @@ func _check_for_tile_data():
 			
 			if tile_data.get_custom_data("is_door"):
 				last_door_pos = tilemap.map_to_local(map_pos + Vector2i(1, 0))
+				# When passing a door/checkpoint, we no longer respawn keys found before it
 				collected_keys_coords.clear() 
 				if keys_collected > 0:
 					keys_collected -= 1
@@ -132,7 +133,7 @@ func _handle_normal_movement(delta):
 		coyote_timer = COYOTE_TIME_MAX
 	else:
 		coyote_timer -= delta
-		velocity += get_gravity() * delta
+		velocity += get_gravity() * delta * 0.8
 
 	var direction = 0.0
 
@@ -181,9 +182,11 @@ func _update_animations(direction):
 		sprite.play("idle")
 
 func _respawn_player():
+	# Loop through every coordinate in the list to put all keys back
 	for coord in collected_keys_coords:
 		tilemap.set_cell(coord, 0, Vector2i(5, 1))
 	
+	# Only subtract the keys that are actually respawning
 	keys_collected -= collected_keys_coords.size()
 	collected_keys_coords.clear()
 	

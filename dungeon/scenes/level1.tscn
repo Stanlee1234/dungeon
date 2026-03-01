@@ -248,7 +248,7 @@ color = Color(0, 0, 0, 1)
 position = Vector2(420, -17)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Win" unique_id=1665952058]
-position = Vector2(762, 108)
+position = Vector2(761, 7)
 shape = SubResource("RectangleShape2D_lbhrr")
 
 [node name="Player" parent="." unique_id=1944656749 instance=ExtResource("2_6sh32")]
