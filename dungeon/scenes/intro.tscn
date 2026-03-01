@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://bbvauc1riud00"]
+[gd_scene format=4 uid="uid://dkkj18uw6oa41"]
 
 [ext_resource type="PackedScene" uid="uid://cyvr03yrg8pu5" path="res://scenes/player.tscn" id="1_yjqpq"]
 [ext_resource type="Texture2D" uid="uid://cahhsomq1gin2" path="res://assets/Dunjo/blacknwhite.png" id="2_4bx60"]
