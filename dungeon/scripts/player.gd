@@ -185,8 +185,12 @@ func _respawn_player():
 
 func _on_win_body_entered(body: Node2D) -> void:
 	if body == self:
-		var current_scene = get_tree().current_scene.name
-		if current_scene == "level1":
-			get_tree().change_scene_to_file("res://scenes/level2.tscn")
-		elif current_scene == "level2":
-			get_tree().change_scene_to_file("res://scenes/win.tscn")
+		# This tells Godot to wait until the current physics frame is over
+		call_deferred("_change_the_scene")
+
+func _change_the_scene():
+	var current_scene = get_tree().current_scene.name
+	if current_scene == "level1":
+		get_tree().change_scene_to_file("res://scenes/level2.tscn")
+	elif current_scene == "level2":
+		get_tree().change_scene_to_file("res://scenes/win.tscn")
