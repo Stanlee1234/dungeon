@@ -5,6 +5,8 @@ extends CharacterBody2D
 @onready var tilemap = get_parent().find_child("*TileMapLayer*", true, false)
 @onready var death_sound = $DeathSound
 @onready var rumble_sound = $RumbleSound
+@onready var tutorial_label = $TutorialLabel
+@onready var tutorial_label2 = $TutorialLabel2
 
 const SPEED = 75.0
 const JUMP_VELOCITY = -190.0
@@ -13,6 +15,7 @@ const SLIDE_SPEED = 40.0
 const COYOTE_TIME_MAX = 0.15
 const TILE_SIZE = 12
 const BLOCKS_TO_WALK = 30
+const TEXT_DISTANCE = 10
 
 var DEAD = false
 var has_control = true
@@ -24,6 +27,7 @@ var last_tile_pos = Vector2i(-1, -1)
 
 var start_x = 0.0
 var sequence_triggered = false
+var text_triggered = false
 var is_falling = false
 var fall_start_y = 0.0
 var max_fall_distance = 0.0
@@ -33,7 +37,9 @@ var collected_keys_coords = []
 func _ready() -> void:
 	start_x = global_position.x
 	last_door_pos = global_position
-	print("DEBUG: Player ready. Starting position saved.")
+	if tutorial_label:
+		tutorial_label.modulate.a = 0.0
+		tutorial_label.visible = true
 
 func _physics_process(delta: float) -> void:
 	if DEAD: return
@@ -42,7 +48,7 @@ func _physics_process(delta: float) -> void:
 		return
 
 	_check_for_tile_data()
-	_check_tutorial_distance()
+	_check_movement_distance()
 
 	if is_climbing:
 		_handle_chain_logic()
@@ -52,16 +58,24 @@ func _physics_process(delta: float) -> void:
 	_handle_landing_rumble()
 	move_and_slide()
 
-func _check_tutorial_distance():
+func _check_movement_distance():
+	var distance = abs(global_position.x - start_x)
+	
+	# 1. Show text after 10 blocks (Fades in once)
+	if not text_triggered and distance >= TEXT_DISTANCE * TILE_SIZE:
+		text_triggered = true
+		if tutorial_label:
+			var tween = create_tween()
+			tween.tween_property(tutorial_label, "modulate:a", 1.0, 0.5)
+	
+	# 2. Trigger earthquake after 30 blocks (Only in intro scene)
 	if get_tree().current_scene.name == "intro" and not sequence_triggered:
-		var distance = abs(global_position.x - start_x)
 		if distance >= BLOCKS_TO_WALK * TILE_SIZE:
 			sequence_triggered = true
 			is_falling = true
 			fall_start_y = global_position.y
 			var intro_scene = get_tree().current_scene
 			if intro_scene.has_method("_trigger_sequence"):
-				print("DEBUG: Distance reached. Triggering Intro Sequence.")
 				intro_scene._trigger_sequence(self)
 
 func _handle_landing_rumble():
@@ -75,7 +89,6 @@ func _handle_landing_rumble():
 	else:
 		if is_falling:
 			if max_fall_distance >= 100.0:
-				print("DEBUG: Heavy landing detected. Applying rumble.")
 				_apply_rumble(0.4, 4.0)
 			is_falling = false
 			max_fall_distance = 0.0
@@ -98,7 +111,6 @@ func _check_for_tile_data():
 
 	if tile_data:
 		if tile_data.get_custom_data("is_danger"):
-			print("DEBUG: Touched danger tile. Respawning.")
 			_respawn_player()
 		
 		if map_pos != last_tile_pos:
@@ -106,15 +118,13 @@ func _check_for_tile_data():
 				keys_collected += 1
 				collected_keys_coords.append(map_pos)
 				tilemap.set_cell(map_pos, -1)
-				print("DEBUG: Key collected at ", map_pos, ". Total keys: ", keys_collected)
 			
 			if tile_data.get_custom_data("is_door"):
 				last_door_pos = tilemap.map_to_local(map_pos + Vector2i(1, 0))
+				collected_keys_coords.clear() 
 				if keys_collected > 0:
 					keys_collected -= 1
-					collected_keys_coords.clear() 
 					tilemap.set_cell(map_pos, 0, Vector2i(6, 1))
-					print("DEBUG: Door opened. Keys saved/cleared.")
 			last_tile_pos = map_pos
 
 		if tile_data.get_custom_data("is_chain"):
@@ -188,11 +198,7 @@ func _update_animations(direction):
 		sprite.play("idle")
 
 func _respawn_player():
-	if death_sound: 
-		death_sound.play()
-		print("DEBUG: Playing death.mp3")
-	
-	print("DEBUG: Resetting ", collected_keys_coords.size(), " keys back to the map.")
+	if death_sound: death_sound.play()
 	for coord in collected_keys_coords:
 		tilemap.set_cell(coord, 0, Vector2i(5, 1))
 	
