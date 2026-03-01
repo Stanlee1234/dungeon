@@ -8,11 +8,11 @@ const SLIDE_SPEED = 40.0
 var DEAD = false
 var on_chain = false
 var is_climbing = false
+var keys_collected = 0
 
 @onready var sprite = $AnimatedSprite2D
 
 func _physics_process(delta: float) -> void:
-
 	if DEAD: return
 
 	_check_for_tile_data()
@@ -26,32 +26,44 @@ func _physics_process(delta: float) -> void:
 
 func _check_for_tile_data():
 	var tilemap = get_parent().find_child("TileMapLayer", true, false)
-	if not tilemap:
-		return
+	if not tilemap: return
 
-	var check_pos = global_position + Vector2(0, 0)
-	var map_pos = tilemap.local_to_map(check_pos)
+	var map_pos = tilemap.local_to_map(global_position)
 	var tile_data = tilemap.get_cell_tile_data(map_pos)
 
 	if tile_data:
+		# Kill the player
 		if tile_data.get_custom_data("is_danger") == true:
-			print("!!! DIED FROM DANGER TILE !!!")
 			_die()
 		
+		# Collect a key
+		if tile_data.get_custom_data("is_key") == true:
+			keys_collected += 1
+			tilemap.set_cell(map_pos, -1)
+			print("Keys collected: ", keys_collected)
+
+		# Open a door
+		if tile_data.get_custom_data("is_door") == true:
+			if keys_collected > 0:
+				keys_collected -= 1
+				tilemap.set_cell(map_pos, -1)
+				print("Door opened! Keys remaining: ", keys_collected)
+		
+		# Chain logic
 		if tile_data.get_custom_data("is_chain") == true:
 			if not on_chain:
 				is_climbing = true
 			on_chain = true
 		else:
-			if on_chain:
-				velocity.y = JUMP_VELOCITY
-			on_chain = false
-			is_climbing = false
+			_handle_chain_exit()
 	else:
-		if on_chain:
-			velocity.y = JUMP_VELOCITY
-		on_chain = false
-		is_climbing = false
+		_handle_chain_exit()
+
+func _handle_chain_exit():
+	if on_chain:
+		velocity.y = JUMP_VELOCITY
+	on_chain = false
+	is_climbing = false
 
 func _handle_normal_movement(delta):
 	if not is_on_floor():
