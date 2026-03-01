@@ -30,11 +30,13 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func _check_for_tile_data():
-	var tilemap = get_parent().find_child("TileMapLayer", true, false)
+	var tilemap = get_parent().find_child("*TileMapLayer*", true, false)
 	if not tilemap: return
 
 	var check_pos = global_position + Vector2(0, -4)
-	var map_pos = tilemap.local_to_map(check_pos)
+	var map_pos = tilemap.local_to_map(tilemap.to_local(check_pos))
+	
+	# TileMapLayer uses coordinates as the first argument
 	var tile_data = tilemap.get_cell_tile_data(map_pos)
 
 	if tile_data:
@@ -44,18 +46,19 @@ func _check_for_tile_data():
 		if map_pos != last_tile_pos:
 			if tile_data.get_custom_data("is_key") == true:
 				keys_collected += 1
+				# DELETING: position, source -1
 				tilemap.set_cell(map_pos, -1)
 				last_tile_pos = map_pos
 
 			if tile_data.get_custom_data("is_door") == true:
 				if keys_collected > 0:
 					keys_collected -= 1
+					# CHANGING: position, source 0, atlas coords (6, 1)
 					tilemap.set_cell(map_pos, 0, Vector2i(6, 1))
 					last_tile_pos = map_pos
 		
 		if tile_data.get_custom_data("is_chain") == true:
-			if not on_chain:
-				is_climbing = true
+			if not on_chain: is_climbing = true
 			on_chain = true
 		else:
 			_exit_chain()
