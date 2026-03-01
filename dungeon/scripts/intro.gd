@@ -14,6 +14,10 @@ func _trigger_sequence(player_node):
 	var shake_intensity = 4.0
 	
 	if camera:
+		if player_node.has_node("RumbleSound"):
+			print("DEBUG: Playing rumble.wav for Intro Animation.")
+			player_node.get_node("RumbleSound").play()
+			
 		var timer = get_tree().create_timer(shake_duration)
 		while timer.time_left > 0:
 			camera.offset = Vector2(randf_range(-shake_intensity, shake_intensity), randf_range(-shake_intensity, shake_intensity))

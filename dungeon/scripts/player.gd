@@ -33,6 +33,7 @@ var collected_keys_coords = []
 func _ready() -> void:
 	start_x = global_position.x
 	last_door_pos = global_position
+	print("DEBUG: Player ready. Starting position saved.")
 
 func _physics_process(delta: float) -> void:
 	if DEAD: return
@@ -60,6 +61,7 @@ func _check_tutorial_distance():
 			fall_start_y = global_position.y
 			var intro_scene = get_tree().current_scene
 			if intro_scene.has_method("_trigger_sequence"):
+				print("DEBUG: Distance reached. Triggering Intro Sequence.")
 				intro_scene._trigger_sequence(self)
 
 func _handle_landing_rumble():
@@ -73,6 +75,7 @@ func _handle_landing_rumble():
 	else:
 		if is_falling:
 			if max_fall_distance >= 100.0:
+				print("DEBUG: Heavy landing detected. Applying rumble.")
 				_apply_rumble(0.4, 4.0)
 			is_falling = false
 			max_fall_distance = 0.0
@@ -95,6 +98,7 @@ func _check_for_tile_data():
 
 	if tile_data:
 		if tile_data.get_custom_data("is_danger"):
+			print("DEBUG: Touched danger tile. Respawning.")
 			_respawn_player()
 		
 		if map_pos != last_tile_pos:
@@ -102,13 +106,15 @@ func _check_for_tile_data():
 				keys_collected += 1
 				collected_keys_coords.append(map_pos)
 				tilemap.set_cell(map_pos, -1)
+				print("DEBUG: Key collected at ", map_pos, ". Total keys: ", keys_collected)
 			
 			if tile_data.get_custom_data("is_door"):
 				last_door_pos = tilemap.map_to_local(map_pos + Vector2i(1, 0))
-				collected_keys_coords.clear() 
 				if keys_collected > 0:
 					keys_collected -= 1
+					collected_keys_coords.clear() 
 					tilemap.set_cell(map_pos, 0, Vector2i(6, 1))
+					print("DEBUG: Door opened. Keys saved/cleared.")
 			last_tile_pos = map_pos
 
 		if tile_data.get_custom_data("is_chain"):
@@ -154,7 +160,6 @@ func _handle_normal_movement(delta):
 
 func _handle_chain_logic():
 	var horizontal_dir = 0.0
-	
 	if has_control:
 		horizontal_dir = Input.get_axis("ui_left", "ui_right")
 		if Input.is_action_pressed("ui_up"):
@@ -183,7 +188,11 @@ func _update_animations(direction):
 		sprite.play("idle")
 
 func _respawn_player():
-	if death_sound: death_sound.play()
+	if death_sound: 
+		death_sound.play()
+		print("DEBUG: Playing death.mp3")
+	
+	print("DEBUG: Resetting ", collected_keys_coords.size(), " keys back to the map.")
 	for coord in collected_keys_coords:
 		tilemap.set_cell(coord, 0, Vector2i(5, 1))
 	
