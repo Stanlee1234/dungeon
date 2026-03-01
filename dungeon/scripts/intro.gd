@@ -4,7 +4,7 @@ extends Node2D
 @onready var tilemap = $TileMapLayer
 @onready var camera = $Player/Camera2D 
 
-const TILE_SIZE = 12
+const TILE_SIZE = 12 
 const BLOCKS_TO_WALK = 10
 
 func _ready() -> void:
@@ -23,7 +23,7 @@ func _start_intro():
 	var target_x = player.global_position.x + (BLOCKS_TO_WALK * TILE_SIZE)
 	var walk_tween = create_tween()
 	
-	walk_tween.tween_property(player, "global_position:x", target_x, 4.0)
+	walk_tween.tween_property(player, "global_position:x", target_x, 2.0)
 	
 	await walk_tween.finished
 	
@@ -42,9 +42,10 @@ func _start_intro():
 	camera.offset = Vector2.ZERO
 	
 	var player_tile = tilemap.local_to_map(player.global_position)
-	for x in range(-2, 3):
-		tilemap.set_cell(Vector2i(player_tile.x + x, player_tile.y), -1)
-		tilemap.set_cell(Vector2i(player_tile.x + x, player_tile.y + 1), -1)
+	
+	for x in range(-3, 4):
+		for y in range(0, 5):
+			tilemap.set_cell(Vector2i(player_tile.x + x, player_tile.y + y), -1)
 
 	player.set_physics_process(true)
 	player.velocity.x = 0 
