@@ -51,16 +51,13 @@ func _physics_process(delta: float) -> void:
 func _check_tutorial_distance():
 	if get_tree().current_scene.name == "intro" and not sequence_triggered:
 		var distance = abs(global_position.x - start_x)
-		
 		if distance >= BLOCKS_TO_WALK * TILE_SIZE:
-			print("DEBUG: 30 Blocks reached! Telling intro to break ground.")
 			sequence_triggered = true
-			
+			is_falling = true
+			fall_start_y = global_position.y
 			var intro_scene = get_tree().current_scene
 			if intro_scene.has_method("_trigger_sequence"):
-				intro_scene._trigger_sequence(self) 
-			else:
-				print("DEBUG ERROR: _trigger_sequence missing on intro root!")
+				intro_scene._trigger_sequence(self)
 
 func _handle_landing_rumble():
 	if not is_on_floor():
@@ -78,12 +75,14 @@ func _handle_landing_rumble():
 			max_fall_distance = 0.0
 
 func _apply_rumble(duration: float, intensity: float):
-	if not camera: return
-	var timer = get_tree().create_timer(duration)
-	while timer.time_left > 0:
-		camera.offset = Vector2(randf_range(-intensity, intensity), randf_range(-intensity, intensity))
-		await get_tree().create_timer(0.01).timeout
-	camera.offset = Vector2.ZERO
+	has_control = false
+	if camera:
+		var timer = get_tree().create_timer(duration)
+		while timer.time_left > 0:
+			camera.offset = Vector2(randf_range(-intensity, intensity), randf_range(-intensity, intensity))
+			await get_tree().create_timer(0.01).timeout
+		camera.offset = Vector2.ZERO
+	has_control = true
 
 func _check_for_tile_data():
 	if not tilemap: return
@@ -118,7 +117,7 @@ func _check_for_tile_data():
 
 func _exit_chain():
 	if on_chain:
-		if Input.is_action_pressed("ui_up"):
+		if has_control and Input.is_action_pressed("ui_up"):
 			velocity.y = JUMP_VELOCITY
 		else:
 			velocity.y = 0 
@@ -130,13 +129,16 @@ func _handle_normal_movement(delta):
 		coyote_timer = COYOTE_TIME_MAX
 	else:
 		coyote_timer -= delta
-		velocity += get_gravity() * delta
+		velocity += get_gravity() * delta *0.9
 
-	if Input.is_action_just_pressed("ui_up") and coyote_timer > 0:
-		velocity.y = JUMP_VELOCITY
-		coyote_timer = 0
+	var direction = 0.0
 
-	var direction := Input.get_axis("ui_left", "ui_right")
+	if has_control:
+		if Input.is_action_just_pressed("ui_up") and coyote_timer > 0:
+			velocity.y = JUMP_VELOCITY
+			coyote_timer = 0
+		direction = Input.get_axis("ui_left", "ui_right")
+
 	if direction:
 		velocity.x = direction * SPEED
 		sprite.flip_h = direction < 0
@@ -146,10 +148,16 @@ func _handle_normal_movement(delta):
 	_update_animations(direction)
 
 func _handle_chain_logic():
-	var horizontal_dir := Input.get_axis("ui_left", "ui_right")
-	if Input.is_action_pressed("ui_up"):
-		velocity.y = CLIMB_SPEED
-		sprite.play("walk")
+	var horizontal_dir = 0.0
+	
+	if has_control:
+		horizontal_dir = Input.get_axis("ui_left", "ui_right")
+		if Input.is_action_pressed("ui_up"):
+			velocity.y = CLIMB_SPEED
+			sprite.play("walk")
+		else:
+			velocity.y = SLIDE_SPEED
+			sprite.play("idle")
 	else:
 		velocity.y = SLIDE_SPEED
 		sprite.play("idle")
