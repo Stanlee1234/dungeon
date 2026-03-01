@@ -26,7 +26,7 @@ func _trigger_sequence(player_node):
 	for x in range(-5, 6):
 		for y in range(0, 15):
 			var target_cell = Vector2i(player_tile.x + x, player_tile.y + y)
-			tilemap.set_cell(target_cell, -1)
+			tilemap.erase_cell(target_cell)
 	
 	await get_tree().create_timer(2.0).timeout
 	

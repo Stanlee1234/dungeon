@@ -26,6 +26,7 @@ var is_falling = false
 var fall_start_y = 0.0
 var max_fall_distance = 0.0
 var last_door_pos = Vector2.ZERO
+var collected_keys_coords = [] 
 
 func _ready() -> void:
 	start_x = global_position.x
@@ -97,10 +98,12 @@ func _check_for_tile_data():
 		if map_pos != last_tile_pos:
 			if tile_data.get_custom_data("is_key"):
 				keys_collected += 1
+				collected_keys_coords.append(map_pos)
 				tilemap.set_cell(map_pos, -1)
 			
 			if tile_data.get_custom_data("is_door"):
 				last_door_pos = tilemap.map_to_local(map_pos + Vector2i(1, 0))
+				collected_keys_coords.clear() 
 				if keys_collected > 0:
 					keys_collected -= 1
 					tilemap.set_cell(map_pos, 0, Vector2i(6, 1))
@@ -129,7 +132,7 @@ func _handle_normal_movement(delta):
 		coyote_timer = COYOTE_TIME_MAX
 	else:
 		coyote_timer -= delta
-		velocity += get_gravity() * delta *0.9
+		velocity += get_gravity() * delta
 
 	var direction = 0.0
 
@@ -178,6 +181,12 @@ func _update_animations(direction):
 		sprite.play("idle")
 
 func _respawn_player():
+	for coord in collected_keys_coords:
+		tilemap.set_cell(coord, 0, Vector2i(5, 1))
+	
+	keys_collected -= collected_keys_coords.size()
+	collected_keys_coords.clear()
+	
 	velocity = Vector2.ZERO
 	global_position = last_door_pos
 	is_falling = false
@@ -185,7 +194,6 @@ func _respawn_player():
 
 func _on_win_body_entered(body: Node2D) -> void:
 	if body == self:
-		# This tells Godot to wait until the current physics frame is over
 		call_deferred("_change_the_scene")
 
 func _change_the_scene():
