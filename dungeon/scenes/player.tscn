@@ -65,7 +65,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_60mlk"]
-size = Vector2(10, 12)
+size = Vector2(10, 11)
 
 [node name="Player" type="CharacterBody2D" unique_id=1944656749]
 script = ExtResource("1_g2els")
@@ -79,6 +79,7 @@ autoplay = "idle"
 frame_progress = 0.95983
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2014202410]
+position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_60mlk")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1794441146]
