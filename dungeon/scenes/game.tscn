@@ -73,10 +73,10 @@ sources/0 = SubResource("TileSetAtlasSource_yqjtg")
 [node name="Level1" type="Node2D" unique_id=991766009]
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=51122968]
-offset_left = -786.0
-offset_top = -186.0
-offset_right = 1242.0
-offset_bottom = 750.0
+offset_left = -1842.0
+offset_top = -1338.0
+offset_right = 3450.0
+offset_bottom = 2514.0
 color = Color(0, 0, 0, 1)
 
 [node name="TileMap" type="TileMap" parent="." unique_id=2006993949]
